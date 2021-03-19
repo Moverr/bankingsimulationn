@@ -8,7 +8,7 @@ class AccountTest extends PlaySpec{
  "Initialize propery as expected " in  {
     account.accName mustBe("Rogers")
     account.accNumber mustBe("67876")
-    account.accBalance mustBe(Some[23434])
+    account.accBalance mustBe(Some(23434.0))
  }
 }
 }

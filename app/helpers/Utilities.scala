@@ -15,6 +15,7 @@ object Utilities {
 
   mapper.registerModule(DefaultScalaModule)
 
+
   def matchEncryption(x:Int) : String = x match {
     case 1=> "MD5"
     case 2=> "AES"
