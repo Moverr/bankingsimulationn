@@ -5,18 +5,20 @@ import javax.inject.Inject
 import play.api.mvc._
 import implicits.AccountResponse._
 import play.api.libs.json.Json
+import services.AccountService
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
-class AccountsController  @Inject()(cc:ControllerComponents)  extends AbstractController(cc){
+class AccountsController  @Inject()(cc:ControllerComponents,accountService: AccountService)  extends AbstractController(cc){
 
 
-  val account =   Account("Muyinda Rogers","12345",None)
+
 
  //todo: list accounts from the service
   def list() = Action.async{
-    val accounts:Seq[Account] = Seq(account)
-    Future.successful(Ok(Json.toJson(accounts)))
+    val response:Seq[Account]= accountService.list()
+    Future.successful(Ok(Json.toJson(response)))
   }
 
 
