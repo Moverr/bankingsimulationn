@@ -1,0 +1,13 @@
+body{
+    background:#eee;
+
+}
+body h1{
+margin-top:300px;
+font-family:verdana;
+text-align:center;
+ color:red;
+}
+pre{
+text-align:center;
+}

@@ -1,0 +1,266 @@
+[0m2021.02.07 23:55:20 INFO  Started: Metals version 0.9.10 in workspace 'D:\mover\parrotenginev2' for client vscode 1.52.1.[0m
+[0m2021.02.07 23:55:22 INFO  time: initialize in 2.46s[0m
+[0m2021.02.07 23:55:28 WARN  Build server is not auto-connectable.[0m
+[0m2021.02.07 23:55:28 WARN  no build target for: D:\mover\parrotenginev2\build.sbt[0m
+[0m2021.02.07 23:55:36 INFO  no build target: using presentation compiler with only scala-library[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\test\controllers\requests\LoginRequestTest.scala[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\test\controllers\AutuhControllerTest.scala[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\routes\main\router\RoutesPrefix.scala[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\project\plugins.sbt[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\app\implicits\CustomColumnTypes.scala[0m
+[0m2021.02.07 23:55:41 WARN  no build target for: D:\mover\parrotenginev2\app\services\IAuthService.scala[0m
+[0m2021.02.07 23:55:42 WARN  no build target for: D:\mover\parrotenginev2\app\helpers\Utilities.scala[0m
+[0m2021.02.07 23:55:42 WARN  no build target for: D:\mover\parrotenginev2\app\db\tables\User.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\app\db\tables\Account.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\requests\LoginRequest.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\traits\BasicController.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\responses\LoginResponse.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\test\controllers\HomeControllerSpec.scala[0m
+[0m2021.02.07 23:55:43 WARN  no build target for: D:\mover\parrotenginev2\test\controllers\AuthControllerTest.scala[0m
+[0m2021.02.07 23:55:45 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\twirl\main\views\html\main.template.scala[0m
+[0m2021.02.07 23:55:45 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\twirl\main\views\html\index.template.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\routes\main\router\Routes.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\routes\main\controllers\ReverseRoutes.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\target\scala-2.13\routes\main\controllers\javascript\JavaScriptReverseRoutes.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\app\services\AuthService.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\app\daos\UserDao.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\HomeController.scala[0m
+[0m2021.02.07 23:55:46 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\AuthController.scala[0m
+Feb 07, 2021 11:55:47 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2Fapp%2Fcontrollers%2Fworksheet.sc:3: error: expected class or object definition val
+val userBase = List(
+^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2Fapp%2Fcontrollers%2Fworksheet.sc:3: error: expected class or object definition val
+val userBase = List(
+^
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:4655)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:4662)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:4876)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:4842)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:4825)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:4824)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:4830)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:142)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:52)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:142)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4887)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+[0m2021.02.07 23:55:47 WARN  no build target for: D:\mover\parrotenginev2\app\controllers\worksheet.sc[0m
+Feb 07, 2021 11:55:48 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2Fapp%2Fcontrollers%2Fworksheet.sc:3: error: expected class or object definition val
+val userBase = List(
+^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2Fapp%2Fcontrollers%2Fworksheet.sc:3: error: expected class or object definition val
+val userBase = List(
+^
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:4655)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:4662)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:4876)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:4842)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:4825)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:4824)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:4830)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:142)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:52)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:142)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4887)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+Feb 07, 2021 11:55:49 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Fapp%2Fcontrollers%2F%24model__Camel%24Controller.scala:9: error: case classes must have a parameter list; try 'case class $model()' or 'case object $model'
+case class $model;format="Camel"$Data(name: String, age: Int)
+                 ^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Fapp%2Fcontrollers%2F%24model__Camel%24Controller.scala:9: error: case classes must have a parameter list; try 'case class $model()' or 'case object $model'
+case class $model;format="Camel"$Data(name: String, age: Int)
+                 ^
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$classDef$1(ScalametaParser.scala:4227)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.classDef(ScalametaParser.scala:4207)
+	at scala.meta.internal.parsers.ScalametaParser.tmplDef(ScalametaParser.scala:4167)
+	at scala.meta.internal.parsers.ScalametaParser.topLevelTmplDef(ScalametaParser.scala:4151)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:4675)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:4663)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:4653)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:4662)
+	at scala.meta.internal.parsers.ScalametaParser.bracelessPackageStats$1(ScalametaParser.scala:4868)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$9(ScalametaParser.scala:4874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:4874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:4842)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:4825)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:4824)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:4830)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:142)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:52)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:142)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4887)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+[0m2021.02.07 23:55:49 WARN  no build target for: D:\mover\parrotenginev2\.g8\form\app\controllers\$model__Camel$Controller.scala[0m
+Feb 07, 2021 11:55:49 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Fapp%2Fcontrollers%2F%24model__Camel%24Controller.scala:9: error: case classes must have a parameter list; try 'case class $model()' or 'case object $model'
+case class $model;format="Camel"$Data(name: String, age: Int)
+                 ^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Fapp%2Fcontrollers%2F%24model__Camel%24Controller.scala:9: error: case classes must have a parameter list; try 'case class $model()' or 'case object $model'
+case class $model;format="Camel"$Data(name: String, age: Int)
+                 ^
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:16)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:17)
+	at scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$classDef$1(ScalametaParser.scala:4227)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.classDef(ScalametaParser.scala:4207)
+	at scala.meta.internal.parsers.ScalametaParser.tmplDef(ScalametaParser.scala:4167)
+	at scala.meta.internal.parsers.ScalametaParser.topLevelTmplDef(ScalametaParser.scala:4151)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:4675)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:4663)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:4653)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:4662)
+	at scala.meta.internal.parsers.ScalametaParser.bracelessPackageStats$1(ScalametaParser.scala:4868)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$9(ScalametaParser.scala:4874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:4874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:4842)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:4825)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:704)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:720)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:4824)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:4830)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:142)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:52)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:142)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4887)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+Feb 07, 2021 11:55:49 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Ftest%2Fcontrollers%2F%24model__Camel%24ControllerSpec.scala:51: error: `$$', `$'ident, `$'this, `$'BlockExpr`$'_
+      val request = CSRFTokenHelper.addCSRFToken(FakeRequest(GET, "/$model;format="camel"$"))
+                                                                                         ^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Ftest%2Fcontrollers%2F%24model__Camel%24ControllerSpec.scala:51: error: `$$', `$'ident, `$'this, `$'BlockExpr`$'_
+      val request = CSRFTokenHelper.addCSRFToken(FakeRequest(GET, "/$model;format="camel"$"))
+                                                                                         ^
+	at scala.meta.internal.tokenizers.Reporter.syntaxError(Reporter.scala:23)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError$(Reporter.scala:23)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.syntaxError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError(Reporter.scala:25)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError$(Reporter.scala:25)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.syntaxError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.LegacyScanner.getStringPart(LegacyScanner.scala:750)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchDoubleQuote$1(LegacyScanner.scala:427)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchToken(LegacyScanner.scala:446)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:251)
+	at scala.meta.internal.tokenizers.LegacyScanner.foreach(LegacyScanner.scala:1107)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.uncachedTokenize(ScalametaTokenizer.scala:157)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.$anonfun$tokenize$1(ScalametaTokenizer.scala:17)
+	at scala.collection.concurrent.TrieMap.getOrElseUpdate(TrieMap.scala:895)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.tokenize(ScalametaTokenizer.scala:17)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer$$anon$2.apply(ScalametaTokenizer.scala:336)
+	at scala.meta.tokenizers.Api$XtensionTokenizeDialectInput.tokenize(Api.scala:25)
+	at scala.meta.tokenizers.Api$XtensionTokenizeInputLike.tokenize(Api.scala:14)
+	at scala.meta.internal.parsers.ScalametaParser.scannerTokens$lzycompute(ScalametaParser.scala:278)
+	at scala.meta.internal.parsers.ScalametaParser.scannerTokens(ScalametaParser.scala:278)
+	at scala.meta.internal.parsers.ScalametaParser.<init>(ScalametaParser.scala:154)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4886)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+[0m2021.02.07 23:55:49 WARN  no build target for: D:\mover\parrotenginev2\.g8\form\test\controllers\$model__Camel$ControllerSpec.scala[0m
+Feb 07, 2021 11:55:49 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Ftest%2Fcontrollers%2F%24model__Camel%24ControllerSpec.scala:51: error: `$$', `$'ident, `$'this, `$'BlockExpr`$'_
+      val request = CSRFTokenHelper.addCSRFToken(FakeRequest(GET, "/$model;format="camel"$"))
+                                                                                         ^
+file%3A%2F%2F%2FD%3A%2Fmover%2Fparrotenginev2%2F.g8%2Fform%2Ftest%2Fcontrollers%2F%24model__Camel%24ControllerSpec.scala:51: error: `$$', `$'ident, `$'this, `$'BlockExpr`$'_
+      val request = CSRFTokenHelper.addCSRFToken(FakeRequest(GET, "/$model;format="camel"$"))
+                                                                                         ^
+	at scala.meta.internal.tokenizers.Reporter.syntaxError(Reporter.scala:23)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError$(Reporter.scala:23)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.syntaxError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError(Reporter.scala:25)
+	at scala.meta.internal.tokenizers.Reporter.syntaxError$(Reporter.scala:25)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.syntaxError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.LegacyScanner.getStringPart(LegacyScanner.scala:750)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchDoubleQuote$1(LegacyScanner.scala:427)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchToken(LegacyScanner.scala:446)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:251)
+	at scala.meta.internal.tokenizers.LegacyScanner.foreach(LegacyScanner.scala:1107)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.uncachedTokenize(ScalametaTokenizer.scala:157)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.$anonfun$tokenize$1(ScalametaTokenizer.scala:17)
+	at scala.collection.concurrent.TrieMap.getOrElseUpdate(TrieMap.scala:895)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.tokenize(ScalametaTokenizer.scala:17)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer$$anon$2.apply(ScalametaTokenizer.scala:336)
+	at scala.meta.tokenizers.Api$XtensionTokenizeDialectInput.tokenize(Api.scala:25)
+	at scala.meta.tokenizers.Api$XtensionTokenizeInputLike.tokenize(Api.scala:14)
+	at scala.meta.internal.parsers.ScalametaParser.scannerTokens$lzycompute(ScalametaParser.scala:278)
+	at scala.meta.internal.parsers.ScalametaParser.scannerTokens(ScalametaParser.scala:278)
+	at scala.meta.internal.parsers.ScalametaParser.<init>(ScalametaParser.scala:154)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$259.apply(ScalametaParser.scala:4886)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	at scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:11)
+	at scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:196)
+	at scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:34)
+
+[0m2021.02.07 23:55:51 INFO  running 'C:\Program Files\Java\jdk1.8.0_221\bin\java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar C:\Users\muyin\AppData\Local\Temp\metals6721658631606211483\sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.02.07 23:56:03 INFO  [info] welcome to sbt 1.3.13 (Oracle Corporation Java 1.8.0_221)[0m
+[0m2021.02.07 23:56:07 INFO  [info] loading global plugins from C:\Users\muyin\.sbt\1.0\plugins[0m
+[0m2021.02.07 23:56:17 INFO  [info] loading settings for project parrotenginev2-build-build-build from metals.sbt ...[0m
+[0m2021.02.07 23:56:17 INFO  [info] loading project definition from D:\mover\parrotenginev2\project\project\project[0m
+[0m2021.02.07 23:56:26 INFO  shutting down Metals[0m
+[0m2021.02.07 23:56:26 INFO  sbt bloopInstall exit: 2147483647[0m
+[0m2021.02.07 23:56:26 INFO  time: ran 'sbt bloopInstall' in 34s[0m
+[0m2021.02.07 23:56:26 ERROR sbt command failed: C:\Program Files\Java\jdk1.8.0_221\bin\java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar C:\Users\muyin\AppData\Local\Temp\metals6721658631606211483\sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall[0m
