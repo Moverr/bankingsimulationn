@@ -1,6 +1,5 @@
 package helpers
 
-import org.scalatest.FunSuite
 import org.scalatestplus.play.PlaySpec
 
 class TransactionTypeTest extends PlaySpec {
