@@ -8,13 +8,14 @@ class TransactionTypeTest extends PlaySpec {
   "Transaction Type" should {
     "Return an ok response on an ok input" in {
 
-      TransactionType.withName("debitdebit").mustBe(TransactionType.debit)
+      TransactionType.withName("debit").mustBe(TransactionType.debit)
     }
 
 
     "Throw Exception " in {
 
-      TransactionType.withName("NOTEXISST").(TransactionType.debit)
+      intercept[NoSuchElementException] {   TransactionType.withName("NOTEXISST") }
+
     }
 
   }
