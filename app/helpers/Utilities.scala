@@ -39,4 +39,5 @@ object Utilities {
   def validateRegexString(matchString: String, matchType:String):Boolean= Pattern.compile(matchRegex(matchType)).matcher(matchString).matches()
 
 
+
 }
