@@ -19,8 +19,8 @@ import org.mockito.Mockito
 class TransactionsControllerTest extends PlaySpec {
 
   val account =   Account("Muyinda Rogers","12345",None)
-  val date_created:DateTime = DateTime.now()
-  val jsonRequest = Json.parse("{\"accnumber\":\"12345\", \"amount\":\"10000\", \"date_created\":\""+date_created+"\" }")
+  val transactionDate:DateTime = DateTime.now()
+  val jsonRequest = Json.parse("{\"accnumber\":\"12345\", \"amount\":\"10000\", \"transaction_date\":\""+transactionDate+"\" }")
 
   "TransactionsController" should{
     val accountService:AccountService = Mockito.mock(classOf[AccountService])
@@ -38,7 +38,7 @@ class TransactionsControllerTest extends PlaySpec {
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
       expectedResult.amount   mustBe 10000.0
-      expectedResult.dateCreated   mustBe  date_created.toString("yyyy-MM-d")
+      expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
 
     }
@@ -55,7 +55,7 @@ class TransactionsControllerTest extends PlaySpec {
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
       expectedResult.amount   mustBe 10000.0
-      expectedResult.dateCreated   mustBe  date_created.toString("yyyy-MM-d")
+      expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
     }
 
