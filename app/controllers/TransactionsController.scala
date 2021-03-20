@@ -9,13 +9,13 @@ class TransactionsController   @Inject()(cc:ControllerComponents)  extends Abstr
 
   //todo: debit
   //todo: list accounts from the service
-  def debit(from:Int,limit:Int) = Action.async{
+  def debit() = Action.async{
 
     Future.successful(Ok("???"))
   }
 
   //todo: credit
-  def credit(from:Int,limit:Int) = Action.async{
+  def credit() = Action.async{
 
     Future.successful(Ok("???"))
   }

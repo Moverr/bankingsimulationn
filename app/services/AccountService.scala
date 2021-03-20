@@ -7,7 +7,7 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
-class AccountService @Inject()(accountDAO: AccountDAO) {
+class AccountService  {
   val account =   Account("Muyinda Rogers","12345",None)
 
   //todo: Get all Accounts
