@@ -1,13 +1,15 @@
 package controllers
 
+import controllers.requests.TransactionRequest
 import helpers.TransactionType
 import javax.inject.Inject
 import org.joda.time.DateTime
 import play.api.mvc.{AbstractController, ControllerComponents}
+import services.TransactionService
 
 import scala.concurrent.Future
 
-class TransactionsController   @Inject()(cc:ControllerComponents)  extends AbstractController(cc) {
+class TransactionsController   @Inject()(cc:ControllerComponents,transactionService: TransactionService  extends AbstractController(cc) {
 
   //todo: debit
   //todo: list accounts from the service
@@ -16,6 +18,9 @@ class TransactionsController   @Inject()(cc:ControllerComponents)  extends Abstr
     val amount =  request.body.asJson.get("amount").as[Float]
     val transactionType = TransactionType.debit
     val date_created = DateTime.now()
+
+    val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,date_created)
+    transactionService.debit(transactionRequest)
 
     Future.successful(Ok("???"))
   }

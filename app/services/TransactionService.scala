@@ -7,11 +7,13 @@ import helpers.TransactionType
 import javax.inject.{Inject, Singleton}
 import org.joda.time.DateTime
 
+import scala.concurrent.Future
+
 @Singleton
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
   //todo: debit
-  def debit(request:TransactionRequest): List[Transaction] ={
+  def debit(request:TransactionRequest): Future[Transaction] ={
     //todo: validate account
     accountService.getByAccNumber(request.accNumber) match {
       case Some(account: Account) =>{
@@ -19,7 +21,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,DateTime.now(),DateTime.now());
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliatioon
-         Seq[Transaction](transaction).toList
+        Future.successful(transaction)
       }
       case None => throw new NullPointerException("Account does not exist")
     }
