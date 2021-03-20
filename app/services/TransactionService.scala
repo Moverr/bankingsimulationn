@@ -8,8 +8,7 @@ import javax.inject.{Inject, Singleton}
 import org.joda.time.DateTime
 
 @Singleton
-class TransactionService @Inject()(
-                                    accountService: AccountService,transactionDAO: TransactionDAO){
+class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
   //todo: debit
   def debit(request:TransactionRequest): List[Transaction] ={
