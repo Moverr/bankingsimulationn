@@ -23,11 +23,11 @@ class TransactionsControllerTest extends PlaySpec {
   val jsonRequest = Json.parse("{\"accnumber\":\"12345\", \"amount\":\"10000\", \"date_created\":\""+date_created+"\" }")
 
   "TransactionsController" should{
+    val accountService:AccountService = Mockito.mock(classOf[AccountService])
+    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO())
+
     "credit Account" in {
       //todo: mock the account service
-      val accountService:AccountService = Mockito.mock(classOf[AccountService])
-      val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO())
-
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
       val response = controller.credit().apply(FakeRequest(Helpers.POST, "/deposit").withJsonBody(jsonRequest))
@@ -38,12 +38,24 @@ class TransactionsControllerTest extends PlaySpec {
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
       expectedResult.amount   mustBe 10000.0
-//      expectedResult.dateCreated.toString   mustBe  date_created.toString
+      expectedResult.dateCreated   mustBe  date_created.toString("yyyy-MM-d")
 
 
     }
 
     "debit Account" in {
+      //todo: mock the account service
+      Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
+      val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
+      val response = controller.debit().apply(FakeRequest(Helpers.POST, "/withdraw").withJsonBody(jsonRequest))
+      val bodyText: String = contentAsString(response)
+      val expectedResult:Transaction = Utilities.fromJson[Transaction](bodyText)
+
+
+      status(response) mustBe OK
+      expectedResult.accNumber mustBe "12345"
+      expectedResult.amount   mustBe 10000.0
+      expectedResult.dateCreated   mustBe  date_created.toString("yyyy-MM-d")
 
     }
 

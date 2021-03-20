@@ -41,17 +41,21 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
   def debit() = Action.async{implicit  request =>
 
     val accnumber = request.body.asJson.get("accnumber").as[String]
-    val amount =  request.body.asJson.get("amount").as[Float]
+    val amount =    request.body.asJson.get("amount").as[String].toFloat
     val transactionType = TransactionType.debit
-    val date_created = DateTime.now()
+    val date_created =request.body.asJson.get("date_created").as[DateTime]
+
 
     val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,date_created)
-     transactionService.debit(transactionRequest)
+
+    val response =  transactionService.debit(transactionRequest)
+
+    response
       .flatMap{
         result=> Future.successful(Ok(Json.toJson(result)))
       }
 
-
+  }
   }
 
 
