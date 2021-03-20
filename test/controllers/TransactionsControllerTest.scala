@@ -37,7 +37,7 @@ class TransactionsControllerTest extends PlaySpec {
 
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
-      expectedResult.amount   mustBe "10000.0"
+      expectedResult.amount   mustBe 10000.0
 //      expectedResult.dateCreated.toString   mustBe  date_created.toString
 
 
