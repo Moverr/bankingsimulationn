@@ -19,6 +19,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       case Some(account: Account) =>{
         //todo: Debit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.dateCreated.toString("yyyy-MM-d"),request.dateCreated.toString("yyyy-MM-d"));
+
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
         Future.successful(transaction)
