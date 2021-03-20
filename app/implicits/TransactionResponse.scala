@@ -8,7 +8,7 @@ import implicits.JodaWrites._
 
 
 
-object TransactioonResponse {
+object TransactionResponse {
 
   implicit val accountResponseWrites: Writes[Transaction] = (
     (JsPath \ "accNumber").write[String] and

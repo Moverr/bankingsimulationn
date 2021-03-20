@@ -32,7 +32,8 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   //todo: credit
   def credit(request:TransactionRequest): Future[Transaction] ={
     //todo: validate account
-    accountService.getByAccNumber(request.accNumber) match {
+    val responsne = accountService.getByAccNumber(request.accNumber)
+    responsne match {
       case Some(account: Account) =>{
         //todo: Debit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,DateTime.now(),DateTime.now());
