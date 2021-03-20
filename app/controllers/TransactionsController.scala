@@ -56,7 +56,7 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
       }
 
   }
-  }
+
 
 
   //todo:  Check Balance
