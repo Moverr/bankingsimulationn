@@ -20,7 +20,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         //todo: Debit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,DateTime.now(),DateTime.now());
         transactionDAO.Create(transaction)
-        //todo: Do Reconnciliatioon
+        //todo: Do Reconnciliation
         Future.successful(transaction)
       }
       case None => throw new NullPointerException("Account does not exist")
@@ -30,15 +30,15 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   }
 
   //todo: credit
-  def credit(request:TransactionRequest): List[Transaction] ={
+  def credit(request:TransactionRequest): Future[Transaction] ={
     //todo: validate account
     accountService.getByAccNumber(request.accNumber) match {
       case Some(account: Account) =>{
         //todo: Debit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,DateTime.now(),DateTime.now());
         transactionDAO.Create(transaction)
-        //todo: Do Reconnciliatioon
-        Seq[Transaction](transaction).toList
+        //todo: Do Reconnciliation
+        Future.successful(transaction)
       }
       case None => throw new NullPointerException("Account does not exist")
     }
