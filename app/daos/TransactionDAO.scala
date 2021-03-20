@@ -8,13 +8,11 @@ import javax.inject.Singleton
 @Singleton
 class TransactionDAO {
 
-//  var transactions:Seq[Transaction] = Seq[Transaction]()
-
-  val transactions =  mutable.Seq[Transaction]()
+  var transactions =  mutable.Seq[Transaction]()
 
   //todo: Add Transactiioon
   def Create(transaction:Transaction): Transaction ={
-     transaction +: transactions;
+     transactions = transactions :+ transaction ;
      transaction
   }
 

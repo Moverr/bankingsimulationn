@@ -5,7 +5,7 @@ import daos.TransactionDAO
 import db.tables.{Account, Transaction}
 import helpers.TransactionType
 import javax.inject.{Inject, Singleton}
-import org.joda.time.DateTime
+
 
 import scala.concurrent.Future
 
@@ -18,7 +18,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     accountService.getByAccNumber(request.accNumber) match {
       case Some(account: Account) =>{
         //todo: Debit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,DateTime.now(),DateTime.now());
+        val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.dateCreated,request.dateCreated);
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
         Future.successful(transaction)
@@ -36,7 +36,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     responsne match {
       case Some(account: Account) =>{
         //todo: Debit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,DateTime.now(),DateTime.now());
+        val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.dateCreated,request.dateCreated);
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
         Future.successful(transaction)

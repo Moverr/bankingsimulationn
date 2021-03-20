@@ -1,7 +1,8 @@
 package controllers
 
 import daos.TransactionDAO
-import db.tables.Account
+import db.tables.{Account, Transaction}
+import helpers.Utilities
 import org.joda.time.DateTime
 import org.mockito.Mockito
 import org.scalatest.FunSuite
@@ -30,7 +31,16 @@ class TransactionsControllerTest extends PlaySpec {
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
       val response = controller.credit().apply(FakeRequest(Helpers.POST, "/deposit").withJsonBody(jsonRequest))
+      val bodyText: String = contentAsString(response)
+      val expectedResult:Transaction = Utilities.fromJson[Transaction](bodyText)
+
+
       status(response) mustBe OK
+      expectedResult.accNumber mustBe "12345"
+      expectedResult.amount   mustBe "10000.0"
+//      expectedResult.dateCreated.toString   mustBe  date_created.toString
+
+
     }
 
     "debit Account" in {
