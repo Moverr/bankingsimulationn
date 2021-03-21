@@ -36,7 +36,7 @@ class TransactionDAO extends AccountService{
     accountBalance
   }
   //todo: Get Transactioons by date and account
-  def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] ={
+  def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] =
     transactions.filter(record=>record.accNumber == accountNumber).filter(record=>record.transactionDate ==transactionDate)
-  }
+
 }
