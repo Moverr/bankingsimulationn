@@ -21,10 +21,10 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
     val accnumber = request.body.asJson.get("accnumber").as[String]
     val amount =    request.body.asJson.get("amount").as[String].toFloat
     val transactionType = TransactionType.credit
-    val date_created =request.body.asJson.get("date_created").as[DateTime]
+    val transaction_date =request.body.asJson.get("transaction_date").as[DateTime]
 
 
-    val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,date_created)
+    val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,transaction_date)
 
     val response =  transactionService.credit(transactionRequest)
 
@@ -43,10 +43,10 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
     val accnumber = request.body.asJson.get("accnumber").as[String]
     val amount =    request.body.asJson.get("amount").as[String].toFloat
     val transactionType = TransactionType.debit
-    val date_created =request.body.asJson.get("transaction_date").as[DateTime]
+    val transaction_date =request.body.asJson.get("transaction_date").as[DateTime]
 
 
-    val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,date_created)
+    val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,transaction_date)
 
     val response =  transactionService.debit(transactionRequest)
 

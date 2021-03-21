@@ -18,7 +18,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     accountService.getByAccNumber(request.accNumber) match {
       case Some(account: Account) =>{
         //todo: Debit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.dateCreated.toString("yyyy-MM-d"),request.dateCreated.toString("yyyy-MM-d"));
+        val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.transactionDate.toString("yyyy-MM-d"));
 
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
@@ -41,7 +41,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     responsne match {
       case Some(account: Account) =>{
         //todo: Debit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.dateCreated.toString("yyyy-MM-d"),request.dateCreated.toString("yyyy-MM-d"));
+        val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
         Future.successful(transaction)

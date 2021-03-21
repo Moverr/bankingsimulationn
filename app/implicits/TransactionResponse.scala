@@ -14,8 +14,7 @@ object TransactionResponse {
     (JsPath \ "accNumber").write[String] and
       (JsPath \ "amount").write[Float] and
       (JsPath \ "transactionType").write[String] and
-      (JsPath \ "dateCreated").write[String] and
-      (JsPath \ "dateUpdated").write[String]
+      (JsPath \ "transactionDate").write[String]
     )(unlift(Transaction.unapply))
 
 }

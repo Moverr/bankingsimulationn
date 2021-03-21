@@ -23,9 +23,10 @@ class TransactionDAO {
     val accTransactions = transactions.filter(record=>record.accNumber == accNumber)
     var accountBalance:Float  = 0
     for(transactioon <- accTransactions){
-      transactioon.transactionType match {
-        case TransactionType.debit.toString  => accountBalance = accountBalance - transactioon.amount
-        case TransactionType.credit.toString => accountBalance = accountBalance + transactioon.amount
+      val transactionType = transactioon.transactionType.toString
+      transactionType match {
+        case "debit"  => accountBalance = accountBalance - transactioon.amount
+        case "credit" => accountBalance = accountBalance + transactioon.amount
        }
     }
     accountBalance
