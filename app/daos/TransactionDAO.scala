@@ -23,8 +23,7 @@ class TransactionDAO {
     val accTransactions = transactions.filter(record=>record.accNumber == accNumber)
     var accountBalance:Float  = 0
     for(transactioon <- accTransactions){
-      val transactionType = transactioon.transactionType.toString
-      transactionType match {
+      transactioon.transactionType match {
         case "debit"  => accountBalance = accountBalance - transactioon.amount
         case "credit" => accountBalance = accountBalance + transactioon.amount
        }
@@ -33,6 +32,6 @@ class TransactionDAO {
   }
   //todo: Get Transactioons
   def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] ={
-    transactions.filter(x=>x.accNumber == accountNumber).filter(record=>record.transactionDate ==transactionDate)
+    transactions.filter(record=>record.accNumber == accountNumber).filter(record=>record.transactionDate ==transactionDate)
   }
 }

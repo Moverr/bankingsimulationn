@@ -14,6 +14,14 @@ class AccountService  {
   def list(): Seq[Account] = Seq(account)
 
   //todo: filter list by account number
-  def getByAccNumber(accNumber:String):Option[Account]= list().filter(x=>x.accNumber==accNumber).headOption
+  def getByAccNumber(accNumber:String):Option[Account]= list().filter(record=>record.accNumber==accNumber).headOption
+
+  //todo: update Account Balance
+  def updateAccountBalance(accNumber:String,accountBalance:Float): Option[Account] = {
+    getByAccNumber(accNumber) match {
+      case Some(account) => Some(Account(account.accName, account.accName, Some(accountBalance)))
+      case None =>  None
+    }
+  }
 
 }
