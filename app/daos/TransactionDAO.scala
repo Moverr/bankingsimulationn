@@ -2,8 +2,10 @@ package daos
 
 import akka.http.scaladsl.model.DateTime
 import db.tables.Transaction
+import helpers.TransactionType
 import javax.inject.Singleton
- import  collection.mutable
+
+import collection.mutable
 
 @Singleton
 class TransactionDAO {
@@ -16,8 +18,20 @@ class TransactionDAO {
      transaction
   }
 
+  //todo: Get Absolute Balance
+  def getAbsoluteBalance(accNumber:String):  Float ={
+    val accTransactions = transactions.filter(record=>record.accNumber == accNumber)
+    var accountBalance:Float  = 0
+    for(transactioon <- accTransactions){
+      transactioon.transactionType match {
+        case TransactionType.debit.toString  => accountBalance = accountBalance - transactioon.amount
+        case TransactionType.credit.toString => accountBalance = accountBalance + transactioon.amount
+       }
+    }
+    accountBalance
+  }
   //todo: Get Transactioons
-  def list(limit:Int,datetime:DateTime): mutable.Seq[Transaction] ={
-    transactions
+  def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] ={
+    transactions.filter(x=>x.accNumber == accountNumber).filter(record=>record.transactionDate ==transactionDate)
   }
 }

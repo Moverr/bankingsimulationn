@@ -27,6 +27,10 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       case None => throw new NullPointerException("Account does not exist")
     }
 
+  }
+
+  //todo: Do Reconciliation
+  def reconcile(accNumber:String): Unit ={
 
   }
 
