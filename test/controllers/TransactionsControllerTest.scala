@@ -18,15 +18,17 @@ import org.mockito.Mockito
 
 class TransactionsControllerTest extends PlaySpec {
 
-  val account =   Account("Muyinda Rogers","12345",None)
+
   val transactionDate:DateTime = DateTime.now()
-  val jsonRequest = Json.parse("{\"accnumber\":\"12345\", \"amount\":\"10000\", \"transaction_date\":\""+transactionDate+"\" }")
+  val jsonRequest = Json.parse("{\"accnumber\":\"12345\", \"amount\":\"1000\", \"transaction_date\":\""+transactionDate+"\" }")
 
   "TransactionsController" should{
+
     val accountService:AccountService = Mockito.mock(classOf[AccountService])
     val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO())
 
     "credit Account" in {
+      val account =   Account("Muyinda Rogers","12345",None)
       //todo: mock the account service
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
@@ -37,13 +39,14 @@ class TransactionsControllerTest extends PlaySpec {
 
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
-      expectedResult.amount   mustBe 10000.0
+      expectedResult.amount   mustBe 1000.0
       expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
 
     }
 
     "debit Account" in {
+      val account =   Account("Muyinda Rogers","12345",Some(2000))
       //todo: mock the account service
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
@@ -54,7 +57,7 @@ class TransactionsControllerTest extends PlaySpec {
 
       status(response) mustBe OK
       expectedResult.accNumber mustBe "12345"
-      expectedResult.amount   mustBe 10000.0
+      expectedResult.amount   mustBe 1000.0
       expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
     }

@@ -1,10 +1,11 @@
 package daos
 
 import akka.http.scaladsl.model.DateTime
-import db.tables.Transaction
+import db.tables.{Account, Transaction}
 import helpers.TransactionType
 import javax.inject.Singleton
 import services.{AccountService, TransactionService}
+
 import collection.mutable
 import collection.mutable
 
@@ -21,7 +22,7 @@ class TransactionDAO extends AccountService{
   }
 
   //todo: update absolute account
-  def updateAbsoluteAccountBalance(accNumber:String): Unit =  updateAccountBalance(accNumber,getAbsoluteBalance(accNumber))
+  def updateAbsoluteAccountBalance(accNumber:String): Option[Account] =  updateAccountBalance(accNumber,getAbsoluteBalance(accNumber))
 
   //todo: Get Absolute Balance
   def getAbsoluteBalance(accNumber:String):  Float ={

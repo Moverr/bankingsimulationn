@@ -35,11 +35,12 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
           throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
         }
 
- 
+
         //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction)
-        //todo: Do Reconnciliation
+        //todo: Do update resultant account
+        transactionDAO.updateAbsoluteAccountBalance(transaction.accNumber)
         Future.successful(transaction)
       }
       case None => throw new NullPointerException("Account does not exist")
@@ -51,11 +52,31 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     //todo: validate account
     accountService.getByAccNumber(request.accNumber) match {
       case Some(account: Account) =>{
+        val dailyTransnactions:mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber,request.transactionDate.toString("yyyy-MM-d"),TransactionType.debit)
+        val totalNumberofWithdraws:Float = dailyTransnactions.map(record=>record.amount).sum
+
+        //todo: Max Withdraw per Day
+        if((totalNumberofWithdraws+request.amount) > Constants.MAX_WITHDRAW_FOR_DAY){
+          throw new RuntimeException("Exceeded Maximum Amount to withdraw per    day ")
+        }
+        //todo: Max Withdraw per Transaction
+        if(request.amount > Constants.MAX_WITHDRAW_PER_TRANSACTION){
+          throw new RuntimeException("Exceeded Maximum Amount to withdraw per   Transaction ")
+        }
+        //todo: Check the number fo daily transactions permitted
+        if(dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION){
+          throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
+        }
+
+        if(account.accBalance.get < request.amount){
+           throw new RuntimeException("Not enough funds to withdraw")
+        }
         //todo: Debit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.transactionDate.toString("yyyy-MM-d"));
 
         transactionDAO.Create(transaction)
-        //todo: Do Reconnciliation
+        //todo: Update Absolute Balancne
+        transactionDAO.updateAbsoluteAccountBalance(transaction.accNumber)
         Future.successful(transaction)
       }
       case None => throw new NullPointerException("Account does not exist")
