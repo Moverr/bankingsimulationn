@@ -3,9 +3,8 @@ package services
 import controllers.requests.TransactionRequest
 import daos.TransactionDAO
 import db.tables.{Account, Transaction}
-import helpers.TransactionType
+import helpers.{Constants, TransactionType}
 import javax.inject.{Inject, Singleton}
-
 
 import scala.concurrent.Future
 import collection.mutable
@@ -21,7 +20,9 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       case Some(account: Account) =>{
         //todo: Get Daily Transactions from this account
         val dailyTransnactions:mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber,request.transactionDate.toString("yyyy-MM-d"),TransactionType.credit)
-        
+        if(dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION){
+          throw new RuntimeException("Exceeded Maximum Number of Withdraws per day ")
+        }
 
         //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
