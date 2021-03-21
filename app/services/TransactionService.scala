@@ -15,26 +15,27 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   //todo: credit
   def credit(request:TransactionRequest): Future[Transaction] ={
     //todo: validate account
-    val responsne = accountService.getByAccNumber(request.accNumber)
-    responsne match {
+    val response = accountService.getByAccNumber(request.accNumber)
+    response match {
       case Some(account: Account) =>{
         //todo: Get Daily Transactions from this account
         val dailyTransnactions:mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber,request.transactionDate.toString("yyyy-MM-d"),TransactionType.credit)
         val totalNumberofDeposits:Float = dailyTransnactions.map(record=>record.amount).sum
 
+        //todo: Max Deposits per Day
+        if((totalNumberofDeposits+request.amount) > Constants.MAX_DEPOSIT_FOR_DAY){
+          throw new RuntimeException("Exceeded Maximum Amount to Deposit per    day ")
+        }
+        //todo: Max Deposit per Transaction
+        if(request.amount > Constants.MAX_DEPOSIT_PER_TRANSACTION){
+          throw new RuntimeException("Exceeded Maximum Amount to Deposit per   Transaction ")
+        }
         //todo: Check the number fo daily transactions permitted
         if(dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION){
           throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
         }
 
-        if((totalNumberofDeposits+request.amount) > Constants.MAX_DEPOSIT_FOR_DAY){
-          throw new RuntimeException("Exceeded Maximum Amount to Deposit per    day ")
-        }
-
-        if(request.amount > Constants.MAX_DEPOSIT_PER_TRANSACTION){
-          throw new RuntimeException("Exceeded Maximum Amount to Deposit per   Transaction ")
-        }
-
+ 
         //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction)
