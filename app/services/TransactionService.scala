@@ -24,9 +24,12 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
         //todo: Check the number fo daily transactions permitted
         if(dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION){
-          throw new RuntimeException("Exceeded Maximum Number of Withdraws per day ")
+          throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
         }
 
+        if((totalNumberofDeposits+request.amount) > Constants.MAX_DEPOSIT_FOR_DAY){
+          throw new RuntimeException("Exceeded Maximum Amount to Deposit per  per day ")
+        }
 
         //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
