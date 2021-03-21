@@ -20,9 +20,13 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       case Some(account: Account) =>{
         //todo: Get Daily Transactions from this account
         val dailyTransnactions:mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber,request.transactionDate.toString("yyyy-MM-d"),TransactionType.credit)
+        val totalNumberofDeposits:Float = dailyTransnactions.map(record=>record.amount).sum
+
+        //todo: Check the number fo daily transactions permitted
         if(dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION){
           throw new RuntimeException("Exceeded Maximum Number of Withdraws per day ")
         }
+
 
         //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
