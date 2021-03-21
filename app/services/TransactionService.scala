@@ -29,9 +29,10 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
   }
 
-  //todo: Do Reconciliation
-  def reconcile(accNumber:String): Unit ={
+  //todo: Validate Transnaction
+  def getAccountDailyTransactions(accNumber:String): Seq[Transaction] ={
 
+    ???
   }
 
   //todo: credit
