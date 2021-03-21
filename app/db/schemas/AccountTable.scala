@@ -1,14 +1,14 @@
 package db.schemas
-import db.tables.Transaction
+import db.tables.{Account, Transaction}
 import slick.jdbc.H2Profile.api._
 
-
-class TransactionTable(tag: Tag) extends Table[Transaction] (tag,"transaction"){
+class AccountTable(tag: Tag)  extends Table[Account] (tag,"account"){
   def id = column[Int]("id",O.PrimaryKey,O.AutoInc)
-  def accNumber = column[String]("accNumber")
+  def accName = column[String]("accName")
   def amount = column[Float]("amount")
   def transactionType = column[String]("transactionType")
   def transactionDate = column[String]("transactionDate")
 
-  override  def * = (accNumber,amount,transactionType,transactionDate).mapTo[Transaction]
+  override  def * = (id,accName,amount,transactionType,transactionDate).mapTo[Account]
 }
+
