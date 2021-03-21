@@ -33,8 +33,8 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "mockito-3-4" % "3.2.2.0" % "test",
 
   //Adding JWT TOkens
-  "com.nimbusds" % "nimbus-jose-jwt" % "8.20.2"
+  "com.nimbusds" % "nimbus-jose-jwt" % "8.20.2",
 
-
+ "com.h2database" % "h2" % "1.4.192"
 )
 

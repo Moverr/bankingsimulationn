@@ -59,12 +59,6 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
 
 
 
-  //todo:  Check Balance
-  def balance() = Action.async{
-
-    Future.successful(Ok("???"))
-  }
-
 
 
 
