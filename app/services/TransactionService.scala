@@ -28,7 +28,11 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         }
 
         if((totalNumberofDeposits+request.amount) > Constants.MAX_DEPOSIT_FOR_DAY){
-          throw new RuntimeException("Exceeded Maximum Amount to Deposit per  per day ")
+          throw new RuntimeException("Exceeded Maximum Amount to Deposit per    day ")
+        }
+
+        if(request.amount > Constants.MAX_DEPOSIT_PER_TRANSACTION){
+          throw new RuntimeException("Exceeded Maximum Amount to Deposit per   Transaction ")
         }
 
         //todo: Credit
