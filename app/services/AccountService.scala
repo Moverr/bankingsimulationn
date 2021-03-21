@@ -17,11 +17,10 @@ class AccountService  {
   def getByAccNumber(accNumber:String):Option[Account]= list().filter(record=>record.accNumber==accNumber).headOption
 
   //todo: update Account Balance
-  def updateAccountBalance(accNumber:String,accountBalance:Float): Option[Account] = {
+  def updateAccountBalance(accNumber:String,accountBalance:Float): Option[Account] =
     getByAccNumber(accNumber) match {
       case Some(account) => Some(Account(account.accName, account.accName, Some(accountBalance)))
-      case None =>  None
+      case None => None
     }
-  }
 
 }
