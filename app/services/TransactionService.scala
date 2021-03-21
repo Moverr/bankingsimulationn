@@ -29,11 +29,9 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
   }
 
-  //todo: Validate Transnaction
-  def getAccountDailyTransactions(accNumber:String): Seq[Transaction] ={
-
-    ???
-  }
+  //todo: Get Number of Daily Transactions
+  def getNumberOfDailyTransactions(accNumber:String,transactionDate:String,transactionType: TransactionType.Value): Int =
+    transactionDAO.list(accNumber,transactionDate).filter(x=>x.transactionType==transactionType).length
 
   //todo: credit
   def credit(request:TransactionRequest): Future[Transaction] ={
