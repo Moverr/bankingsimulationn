@@ -8,6 +8,7 @@ import javax.inject.{Inject, Singleton}
 
 
 import scala.concurrent.Future
+import collection.mutable
 
 @Singleton
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
@@ -18,7 +19,11 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     val responsne = accountService.getByAccNumber(request.accNumber)
     responsne match {
       case Some(account: Account) =>{
-        //todo: Debit
+        //todo: Get Daily Transactions from this account
+        val dailyTransnactions:mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber,request.transactionDate.toString("yyyy-MM-d"),TransactionType.credit)
+        
+
+        //todo: Credit
         val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction)
         //todo: Do Reconnciliation
@@ -46,8 +51,9 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   }
 
   //todo: Get Number of Daily Transactions
-  def getNumberOfDailyTransactions(accNumber:String,transactionDate:String,transactionType: TransactionType.Value): Int =
-    transactionDAO.list(accNumber,transactionDate).filter(x=>x.transactionType==transactionType).length
+  def getNumberOfDailyTransactions(accNumber:String,transactionDate:String,transactionType: TransactionType.Value): mutable.Seq[Transaction] =
+     transactionDAO.list(accNumber,transactionDate).filter(x=>x.transactionType==transactionType)
+
 
 
 
