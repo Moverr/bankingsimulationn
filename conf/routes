@@ -8,7 +8,7 @@ GET     /                           controllers.HomeController.index()
 
 #Account
 GET    /accounts                    controllers.AccountsController.list()
-POST   /balance                     controllers.AccountsController.checkBalance()
+GET    /balance/:accountName        controllers.AccountsController.checkBalance(accountName:String)
 #Transactions
 POST   /deposit                     controllers.TransactionsController.credit()
 POST   /withdraw                    controllers.TransactionsController.debit()
