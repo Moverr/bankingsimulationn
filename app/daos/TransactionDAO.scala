@@ -1,24 +1,36 @@
 package daos
 
 import akka.http.scaladsl.model.DateTime
-import db.tables.{Account, Transaction}
+import db.schemas.TransactionTable
+import db.tables.{Account, Transaction, User, UserTable}
 import helpers.TransactionType
-import javax.inject.Singleton
+import javax.inject.{Inject, Singleton}
+import play.api.db.slick.DatabaseConfigProvider
 import services.{AccountService, TransactionService}
 
 import collection.mutable
 import collection.mutable
+import slick.jdbc.H2Profile.api._
+import slick.jdbc.JdbcProfile
+import slick.lifted.TableQuery
+
+import scala.concurrent.Future
 
 @Singleton
-class TransactionDAO extends AccountService{
+class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  extends AccountService{
+
+  private  val dbConfig = dbConfigProvider.get[JdbcProfile]
+  lazy  val transactionTable = TableQuery[TransactionTable]
+  import dbConfig._
+
 
   var transactions =  mutable.Seq[Transaction]()
 
 
   //todo: Add Transactiioon
-  def Create(transaction:Transaction): Transaction ={
-     transactions = transactions :+ transaction ;
-     transaction
+  def Create(transaction:Transaction): Future[Transaction] ={
+    val query = transactionTable.returning(transactionTable) += Transaction(0L,transaction.accNumber,transaction.amount,transaction.transactionType,transaction.transactionDate)
+    db.run(query)
   }
 
   //todo: update absolute account
@@ -26,6 +38,7 @@ class TransactionDAO extends AccountService{
 
   //todo: Get Absolute Balance
   def getAbsoluteBalance(accNumber:String):  Float ={
+
     val accTransactions = transactions.filter(record=>record.accNumber == accNumber)
     var accountBalance:Float  = 0
     for(transactioon <- accTransactions){
