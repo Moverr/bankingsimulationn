@@ -7,7 +7,6 @@ import helpers.{Constants, TransactionType}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{Await, Future}
-import collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 
