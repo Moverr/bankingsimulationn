@@ -44,15 +44,18 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  {
     val query = transactionTable.filter(record=>record.accNumber === accNumber).result
     db.run(query)
 
-//    accTransactions.map(x=>x.foreach(b=>b.transactionType match {
-//      case "debit"  => accountBalance = accountBalance - b.amount
-//      case "credit" => accountBalance = accountBalance + b.amount
-//    }))
-
-//    accountBalance
   }
   //todo: Get Transactioons by date and account
-  def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] =
-    transactions.filter(record=>record.accNumber == accountNumber).filter(record=>record.transactionDate ==transactionDate)
+  def list(accountNumber:String, transactionDate:String,transactiontype:String):Future[Seq[Transaction]] = {
+
+    val query = transactionTable
+      .filter(record=>record.accNumber === accountNumber)
+      .filter(record=>record.transactionDate === transactionDate)
+      .filter(record=>record.transactionType === transactiontype)
+      .result
+    db.run(query)
+
+
+  }
 
 }

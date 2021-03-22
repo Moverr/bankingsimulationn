@@ -22,7 +22,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         y match {
           case Some(account:Account) =>{
             //todo: Get Daily Transactions from this account
-            val dailyTransnactions: mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.credit)
+            val dailyTransnactions: Seq[Transaction] = Await.result(getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.credit.toString),Duration.Inf)
             val totalNumberofDeposits: Float = dailyTransnactions.map(record => record.amount).sum
 
             //todo: Max Deposits per Day
@@ -64,7 +64,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       y=>
         y match {
           case Some(account:Account) =>{
-            val dailyTransnactions: mutable.Seq[Transaction] = getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.debit)
+            val dailyTransnactions: Seq[Transaction] = Await.result(getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.credit.toString),Duration.Inf)
             val totalNumberofWithdraws: Float = dailyTransnactions.map(record => record.amount).sum
 
             //todo: Max Withdraw per Day
@@ -103,8 +103,8 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   }
 
   //todo: Get Number of Daily Transactions
-  def getNumberOfDailyTransactions(accNumber:String,transactionDate:String,transactionType: TransactionType.Value): mutable.Seq[Transaction] =
-     transactionDAO.list(accNumber,transactionDate).filter(x=>x.transactionType==transactionType)
+  def getNumberOfDailyTransactions(accNumber:String,transactionDate:String,transactionType: String): Future[Seq[Transaction]] =
+     transactionDAO.list(accNumber,transactionDate,transactionType).map(x=>x)
 
 
   def updateAbsoluteBalance(accountName:String): Future[Unit] ={
