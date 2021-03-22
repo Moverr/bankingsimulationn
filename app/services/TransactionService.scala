@@ -44,7 +44,10 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
             //todo: Credit
             val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.credit.toString, request.transactionDate.toString("yyyy-MM-d"));
             transactionDAO.Create(transaction).map{
-              response => response
+              response => {
+                updateAbsoluteBalance(account.accNumber)
+                response
+              }
             }
 
           }
@@ -86,9 +89,13 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
             val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.debit.toString, request.transactionDate.toString("yyyy-MM-d"));
 
             transactionDAO.Create(transaction).map{
-              response => response
+              response => {
+                updateAbsoluteBalance(account.accNumber)
+                response
+              }
             }
             //todo: Update Absolute Balancne
+
           }
           case None =>throw new NullPointerException("Account does not exist")
         }

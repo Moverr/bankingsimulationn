@@ -66,9 +66,12 @@ class TransactionsControllerTest   extends PlaySpec  {
 
     }
 
-    /*
     "debit Account" in {
-      val account =   Account(0L,"Muyinda Rogers","12345",Some(2000))
+      val account =   Account(0L,"Muyinda Rogers","12345",Some(1000))
+      val accountService:AccountService = Mockito.mock(classOf[AccountService])
+      Mockito.when(accountService.getByAccNumber("1234")).thenReturn(Future.successful(Some(account)))
+
+
       //todo: mock the account service
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
       val response = controller.debit().apply(FakeRequest(Helpers.POST, "/withdraw").withJsonBody(jsonRequest))
@@ -82,7 +85,7 @@ class TransactionsControllerTest   extends PlaySpec  {
       expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
     }
-    */
+
 
 
 
