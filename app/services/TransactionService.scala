@@ -14,6 +14,7 @@ import scala.concurrent.duration.Duration
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
   //todo: credit
+
   def credit(request:TransactionRequest): Future[Transaction] = {
     //todo: validate account
      val response = accountService.getByAccNumber(request.accNumber)
@@ -34,7 +35,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
               throw new RuntimeException("Exceeded Maximum Amount to Deposit per   Transaction ")
             }
             //todo: Check the number fo daily transactions permitted
-            if (dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION) {
+            if (dailyTransnactions.length >= Constants.MAX_DEPOSIT_FREQUENCY_PER_DAY) {
               throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
             }
 
@@ -64,24 +65,24 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
       y=>
         y match {
           case Some(account:Account) =>{
-            val dailyTransnactions: Seq[Transaction] = Await.result(getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.credit.toString),Duration.Inf)
+            val dailyTransnactions: Seq[Transaction] = Await.result(getNumberOfDailyTransactions(request.accNumber, request.transactionDate.toString("yyyy-MM-d"), TransactionType.debit.toString),Duration.Inf)
             val totalNumberofWithdraws: Float = dailyTransnactions.map(record => record.amount).sum
 
             //todo: Max Withdraw per Day
             if ((totalNumberofWithdraws + request.amount) > Constants.MAX_WITHDRAW_FOR_DAY) {
-              throw new RuntimeException("Exceeded Maximum Amount to withdraw per    day ")
+             Future.successful(throw new RuntimeException("Exceeded Maximum Amount to withdraw per    day "))
             }
             //todo: Max Withdraw per Transaction
             if (request.amount > Constants.MAX_WITHDRAW_PER_TRANSACTION) {
-              throw new RuntimeException("Exceeded Maximum Amount to withdraw per   Transaction ")
+              Future.successful(throw new RuntimeException("Exceeded Maximum Amount to withdraw per   Transaction "))
             }
             //todo: Check the number fo daily transactions permitted
-            if (dailyTransnactions.length >= Constants.MAX_DEPOSIT_PER_TRANSACTION) {
-              throw new RuntimeException("Exceeded Maximum Number of deposits per day ")
+            if (dailyTransnactions.length >= Constants.MAX_WITHDRAW_FREQUENCY_PER_DAY) {
+              Future.successful(throw new RuntimeException("Exceeded Maximum Number of withdraws per day "))
             }
 
             if (account.accBalance.get < request.amount) {
-              throw new RuntimeException("Not enough funds to withdraw")
+              Future.successful(throw new RuntimeException("Not enough funds to withdraw"))
             }
             //todo: Debit
             val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.debit.toString, request.transactionDate.toString("yyyy-MM-d"));

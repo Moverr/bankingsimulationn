@@ -1,6 +1,9 @@
 package controllers
 
+import java.util.NoSuchElementException
+
 import controllers.requests.TransactionRequest
+import db.tables.Transaction
 import helpers.TransactionType
 import javax.inject.Inject
 import org.joda.time.DateTime
@@ -13,10 +16,12 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import implicits.TransactionResponse._
 import implicits.JodaReads._
 
+import scala.util.{Failure, Success}
+
 class TransactionsController   @Inject()(cc:ControllerComponents,transactionService: TransactionService)  extends AbstractController(cc) {
 
   //todo: Deposit
-  def credit() = Action.async{ implicit  request =>
+  def credit() = Action.async{ implicit request =>
 
     try {
 
@@ -31,12 +36,13 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
 
      transactionService.credit(transactionRequest)
       .flatMap{
-        result=> Future.successful(Ok(Json.toJson(result)))
+        result:Transaction=>  Future.successful(Ok(Json.toJson(result)))
       }
+
     }catch{
-      case e:RuntimeException =>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
-      case eb:NullPointerException=>  Future.successful(NotFound(Json.toJson(eb.getMessage)))
-    //  case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
+      case e:RuntimeException =>Future.successful(BadRequest(e.getMessage))
+      case x :NullPointerException => Future.successful(InternalServerError(x.getMessage))
+      case e:Exception => Future.successful(InternalServerError(e.getMessage))
     }
   }
 
