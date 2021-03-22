@@ -1,6 +1,6 @@
 package controllers
 
-import daos.TransactionDAO
+import daos.{AccountDAO, TransactionDAO}
 import db.tables.{Account, Transaction}
 import helpers.Utilities
 import javax.inject.Inject
@@ -41,15 +41,17 @@ class TransactionsControllerTest   extends PlaySpec  {
 
   "TransactionsController" should{
 
-    val accountService:AccountService = Mockito.mock(classOf[AccountService])
 
+    val accountDao = new AccountDAO(dbConfProvider)
+    val accountService = new AccountService(accountDao)
+    val transnactionDao = new TransactionDAO(dbConfProvider)
 
-    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO(dbConfProvider))
+    val transactionService:TransactionService = new TransactionService(accountService,transnactionDao)
 
     "credit Account" in {
       val account =   Account(0L,"Muyinda Rogers","12345",None)
       //todo: mock the account service
-      Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
+    //  Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Future[Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
       val response = controller.credit().apply(FakeRequest(Helpers.POST, "/deposit").withJsonBody(jsonRequest))
       val bodyText: String = contentAsString(response)
@@ -64,10 +66,10 @@ class TransactionsControllerTest   extends PlaySpec  {
 
     }
 
+    /*
     "debit Account" in {
       val account =   Account(0L,"Muyinda Rogers","12345",Some(2000))
       //todo: mock the account service
-      Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
       val response = controller.debit().apply(FakeRequest(Helpers.POST, "/withdraw").withJsonBody(jsonRequest))
       val bodyText: String = contentAsString(response)
@@ -80,6 +82,7 @@ class TransactionsControllerTest   extends PlaySpec  {
       expectedResult.transactionDate   mustBe  transactionDate.toString("yyyy-MM-d")
 
     }
+    */
 
 
 

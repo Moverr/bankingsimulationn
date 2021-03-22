@@ -9,7 +9,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 @Singleton
 class AccountService @Inject()(accountDAO: AccountDAO) {
-  val account =   Account(0L,"Muyinda Rogers","12345",None)
 
   //todo: Get all Accounts
   def list(): Future[Seq[Account]] = accountDAO.getAccounts().map(x=>x.map(y=>y))
@@ -28,7 +27,7 @@ class AccountService @Inject()(accountDAO: AccountDAO) {
     getByAccNumber(accNumber).map(x=>x.get)
   }
 
-  
+
 
 
 }

@@ -14,18 +14,16 @@ class AccountsController  @Inject()(cc:ControllerComponents,accountService: Acco
 
 
 
-
- //todo: list accounts from the service
-  def list() = Action.async{
-    val response:Seq[Account]= accountService.list()
-    Future.successful(Ok(Json.toJson(response)))
-  }
-
-
   //todo: check balance on a given account
   def checkBalance(accountNo:String) = Action.async{
-   val response:Account =  accountService.getAccountBalancne(accountNo)
-    Future.successful(Ok(Json.toJson(response)))
+     accountService.getByAccNumber(accountNo).map(x=>x).flatMap{
+       y=>
+         y match {
+           case Some(value) => Future.successful(Ok(Json.toJson(value)))
+           case None => Future.successful(BadRequest("Record does not exist"))
+         }
+     }
+
   }
 
 

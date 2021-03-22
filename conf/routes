@@ -7,7 +7,6 @@
 GET     /                           controllers.HomeController.index()
 
 #Account
-GET    /accounts                    controllers.AccountsController.list()
 GET    /balance/:accountName        controllers.AccountsController.checkBalance(accountName:String)
 #Transactions
 POST   /deposit                     controllers.TransactionsController.credit()
