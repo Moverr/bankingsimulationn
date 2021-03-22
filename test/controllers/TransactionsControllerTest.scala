@@ -3,6 +3,7 @@ package controllers
 import daos.TransactionDAO
 import db.tables.{Account, Transaction}
 import helpers.Utilities
+import javax.inject.Inject
 import org.joda.time.DateTime
 import org.mockito.Mockito
 import org.scalatest.FunSuite
@@ -15,10 +16,24 @@ import play.api.libs.json.Json
 import play.api.test.Helpers._
 import play.api.test._
 import org.mockito.Mockito
+import play.api.Mode
 import play.api.db.slick.DatabaseConfigProvider
+import play.api.inject.Injector
+import play.api.inject.guice.GuiceApplicationBuilder
 import slick.jdbc.H2Profile.api._
 
-class TransactionsControllerTest extends PlaySpec {
+import collection.mutable
+import slick.jdbc.H2Profile.api._
+import slick.jdbc.JdbcProfile
+import slick.lifted.TableQuery
+
+
+class TransactionsControllerTest   extends PlaySpec  {
+
+
+  lazy val appBuilder: GuiceApplicationBuilder = new GuiceApplicationBuilder().in(Mode.Test)
+  lazy val injector: Injector = appBuilder.injector()
+  lazy val dbConfProvider: DatabaseConfigProvider = injector.instanceOf[DatabaseConfigProvider]
 
 
   val transactionDate:DateTime = DateTime.now()
@@ -27,8 +42,9 @@ class TransactionsControllerTest extends PlaySpec {
   "TransactionsController" should{
 
     val accountService:AccountService = Mockito.mock(classOf[AccountService])
-    val act:DatabaseConfigProvider = Mockito.mock(classOf[DatabaseConfigProvider])
-    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO(act))
+
+
+    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO(dbConfProvider))
 
     "credit Account" in {
       val account =   Account(0L,"Muyinda Rogers","12345",None)

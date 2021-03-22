@@ -10,7 +10,7 @@ import services.{AccountService, TransactionService}
 
 import collection.mutable
 import collection.mutable
-import slick.jdbc.H2Profile.api._
+import slick.jdbc.PostgresProfile.api._
 import slick.jdbc.JdbcProfile
 import slick.lifted.TableQuery
 
@@ -32,8 +32,8 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
   def Create(transaction:Transaction): Future[Transaction] ={
     val query = transactionTable.returning(transactionTable) += transaction
     //  Transaction(0L,transaction.accNumber,transaction.amount,transaction.transactionType,transaction.transactionDate)
-   val x =  db.run(query)
-    x
+     db.run(query)
+
   }
 
   //todo: update absolute account
