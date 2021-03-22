@@ -18,6 +18,9 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
   //todo: Deposit
   def credit() = Action.async{ implicit  request =>
 
+    try {
+
+
     val accnumber = request.body.asJson.get("accnumber").as[String]
     val amount =    request.body.asJson.get("amount").as[String].toFloat
     val transactionType = TransactionType.credit
@@ -32,13 +35,17 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
       .flatMap{
         result=> Future.successful(Ok(Json.toJson(result)))
       }
-
+    }catch{
+      case e:RuntimeException=>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
+      case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
+    }
   }
 
 
 
   //todo: Withdraw
   def debit() = Action.async{implicit  request =>
+    try {
 
     val accnumber = request.body.asJson.get("accnumber").as[String]
     val amount =    request.body.asJson.get("amount").as[String].toFloat
@@ -54,7 +61,10 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
       .flatMap{
         result=> Future.successful(Ok(Json.toJson(result)))
       }
-
+    }catch{
+      case e:RuntimeException=>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
+      case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
+    }
   }
 
 

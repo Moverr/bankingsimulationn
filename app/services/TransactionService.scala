@@ -7,10 +7,11 @@ import db.tables.{Account, Transaction}
 import helpers.{Constants, TransactionType}
 import javax.inject.{Inject, Singleton}
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
 import collection.mutable
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
 @Singleton
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
@@ -41,7 +42,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         //todo: Credit
         val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.credit.toString, request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction).map{
-          x => x
+          response => response
         }
 
       }
@@ -49,9 +50,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
     }
   }
 
-  def populateResponse(tr:Transaction): TransactionResponse ={
-      ???
-  }
+
   //todo: debit
   def debit(request:TransactionRequest): Future[Transaction] = {
     //todo: validate account
@@ -80,7 +79,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.debit.toString, request.transactionDate.toString("yyyy-MM-d"));
 
         transactionDAO.Create(transaction).map{
-          x => x
+          response => response
         }
         //todo: Update Absolute Balancne
 
@@ -95,6 +94,23 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
      transactionDAO.list(accNumber,transactionDate).filter(x=>x.transactionType==transactionType)
 
 
+  def updateAbsoluteBalance(accountName:String): Future[Unit] ={
+    val res:Seq[Transaction] = Await.result(transactionDAO.getAbsoluteBalance(accountName),Duration.Inf)
+
+    if(res != null){
+        var accountBalance:Float = 0
+
+        res.foreach{
+          x=> x.transactionType match {
+            case "credit" => accountBalance += x.amount
+            case "debit" =>  accountBalance -= x.amount
+          }
+        }
+        accountService updateAccountBalance(accountName,accountBalance)
+    }
+
+    Future.successful()
+  }
 
 
 

@@ -18,7 +18,7 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  extends AccountService{
+class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  {
 
   private  val dbConfig = dbConfigProvider.get[JdbcProfile]
   lazy  val transactionTable = TableQuery[TransactionTable]
@@ -36,22 +36,20 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
   }
 
   //todo: update absolute account
-  def updateAbsoluteAccountBalance(accNumber:String): Option[Account] =  updateAccountBalance(accNumber,getAbsoluteBalance(accNumber))
+ // def updateAbsoluteAccountBalance(accNumber:String): Option[Account] =  updateAccountBalance(accNumber,getAbsoluteBalance(accNumber))
 
   //todo: Get Absolute Balance
-  def getAbsoluteBalance(accNumber:String):  Float ={
-    var accountBalance:Float  = 0
+  def getAbsoluteBalance(accNumber:String):  Future[Seq[Transaction]] ={
+
     val query = transactionTable.filter(record=>record.accNumber === accNumber).result
-    val  accTransactions:Future[Seq[Transaction]] =   db.run(query)
+    db.run(query)
 
-    accTransactions.map(x=>x.foreach(b=>b.transactionType match {
-      case "debit"  => accountBalance = accountBalance - b.amount
-      case "credit" => accountBalance = accountBalance + b.amount
-    }))
+//    accTransactions.map(x=>x.foreach(b=>b.transactionType match {
+//      case "debit"  => accountBalance = accountBalance - b.amount
+//      case "credit" => accountBalance = accountBalance + b.amount
+//    }))
 
-
-
-    accountBalance
+//    accountBalance
   }
   //todo: Get Transactioons by date and account
   def list(accountNumber:String, transactionDate:String): mutable.Seq[Transaction] =

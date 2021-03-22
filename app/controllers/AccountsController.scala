@@ -24,7 +24,7 @@ class AccountsController  @Inject()(cc:ControllerComponents,accountService: Acco
 
   //todo: check balance on a given account
   def checkBalance(accountNo:String) = Action.async{
-   val response:Account =  accountService.getByAccNumber(accountNo).get
+   val response:Account =  accountService.getAccountBalancne(accountNo)
     Future.successful(Ok(Json.toJson(response)))
   }
 
