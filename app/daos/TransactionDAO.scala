@@ -31,7 +31,6 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
   //todo: Add Transactiioon
   def Create(transaction:Transaction): Future[Transaction] ={
     val query = transactionTable.returning(transactionTable) += transaction
-    //  Transaction(0L,transaction.accNumber,transaction.amount,transaction.transactionType,transaction.transactionDate)
      db.run(query)
 
   }
@@ -51,13 +50,7 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
     }))
 
 
-    /*
-    for(transactioon <- accTransactions){
-      transactioon.transactionType match {
-        case "debit"  => accountBalance = accountBalance - transactioon.amount
-        case "credit" => accountBalance = accountBalance + transactioon.amount
-       }
-    } */
+
     accountBalance
   }
   //todo: Get Transactioons by date and account

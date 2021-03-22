@@ -1,6 +1,7 @@
 package services
 
 import controllers.requests.TransactionRequest
+import controllers.responses.TransactionResponse
 import daos.TransactionDAO
 import db.tables.{Account, Transaction}
 import helpers.{Constants, TransactionType}
@@ -39,13 +40,18 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
         //todo: Credit
         val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.credit.toString, request.transactionDate.toString("yyyy-MM-d"));
-        transactionDAO.Create(transaction)
+        transactionDAO.Create(transaction).map{
+          x => x
+        }
 
       }
 
     }
   }
 
+  def populateResponse(tr:Transaction): TransactionResponse ={
+      ???
+  }
   //todo: debit
   def debit(request:TransactionRequest): Future[Transaction] = {
     //todo: validate account
@@ -73,7 +79,9 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         //todo: Debit
         val transaction = Transaction(0L, account.accNumber, request.amount, TransactionType.debit.toString, request.transactionDate.toString("yyyy-MM-d"));
 
-        transactionDAO.Create(transaction)
+        transactionDAO.Create(transaction).map{
+          x => x
+        }
         //todo: Update Absolute Balancne
 
       }
