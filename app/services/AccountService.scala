@@ -8,7 +8,7 @@ import scala.concurrent.Future
 
 @Singleton
 class AccountService  {
-  val account =   Account("Muyinda Rogers","12345",None)
+  val account =   Account(0L,"Muyinda Rogers","12345",None)
 
   //todo: Get all Accounts
   def list(): Seq[Account] = Seq(account)
@@ -19,7 +19,7 @@ class AccountService  {
   //todo: update Account Balance
   def updateAccountBalance(accNumber:String,accountBalance:Float): Option[Account] =
     getByAccNumber(accNumber) match {
-      case Some(account) => Some(Account(account.accName, account.accName, Some(accountBalance)))
+      case Some(account) => Some(Account(0L,account.accName, account.accName, Some(accountBalance)))
       case None => None
     }
 

@@ -37,7 +37,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
 
         //todo: Credit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
+        val transaction = Transaction(0L,account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
         transactionDAO.Create(transaction)
         //todo: Do update resultant account
         transactionDAO.updateAbsoluteAccountBalance(transaction.accNumber)
@@ -72,7 +72,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
            throw new RuntimeException("Not enough funds to withdraw")
         }
         //todo: Debit
-        val transaction = Transaction(account.accNumber,request.amount,TransactionType.debit.toString,request.transactionDate.toString("yyyy-MM-d"));
+        val transaction = Transaction(0L,account.accNumber,request.amount,TransactionType.debit.toString,request.transactionDate.toString("yyyy-MM-d"));
 
         transactionDAO.Create(transaction)
         //todo: Update Absolute Balancne

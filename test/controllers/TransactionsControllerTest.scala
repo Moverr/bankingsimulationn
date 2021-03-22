@@ -28,7 +28,7 @@ class TransactionsControllerTest extends PlaySpec {
     val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO())
 
     "credit Account" in {
-      val account =   Account("Muyinda Rogers","12345",None)
+      val account =   Account(0L,"Muyinda Rogers","12345",None)
       //todo: mock the account service
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
@@ -46,7 +46,7 @@ class TransactionsControllerTest extends PlaySpec {
     }
 
     "debit Account" in {
-      val account =   Account("Muyinda Rogers","12345",Some(2000))
+      val account =   Account(0L,"Muyinda Rogers","12345",Some(2000))
       //todo: mock the account service
       Mockito.when(accountService.getByAccNumber(account.accNumber)).thenReturn(Some(account))
       val controller   = new TransactionsController(Helpers.stubControllerComponents(),transactionService)
