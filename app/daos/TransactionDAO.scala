@@ -2,7 +2,7 @@ package daos
 
 import akka.http.scaladsl.model.DateTime
 import db.schemas.TransactionTable
-import db.tables.{Account, Transaction, User, UserTable}
+import db.tables.{Account, Transaction}
 import helpers.TransactionType
 import javax.inject.{Inject, Singleton}
 import play.api.db.slick.DatabaseConfigProvider
@@ -15,6 +15,7 @@ import slick.jdbc.JdbcProfile
 import slick.lifted.TableQuery
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
 class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  extends AccountService{
@@ -29,8 +30,10 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
 
   //todo: Add Transactiioon
   def Create(transaction:Transaction): Future[Transaction] ={
-    val query = transactionTable.returning(transactionTable) += Transaction(0L,transaction.accNumber,transaction.amount,transaction.transactionType,transaction.transactionDate)
-    db.run(query)
+    val query = transactionTable.returning(transactionTable) += transaction
+    //  Transaction(0L,transaction.accNumber,transaction.amount,transaction.transactionType,transaction.transactionDate)
+   val x =  db.run(query)
+    x
   }
 
   //todo: update absolute account
@@ -38,15 +41,23 @@ class TransactionDAO  @Inject()(dbConfigProvider: DatabaseConfigProvider)  exten
 
   //todo: Get Absolute Balance
   def getAbsoluteBalance(accNumber:String):  Float ={
-
-    val accTransactions = transactions.filter(record=>record.accNumber == accNumber)
     var accountBalance:Float  = 0
+    val query = transactionTable.filter(record=>record.accNumber === accNumber).result
+    val  accTransactions:Future[Seq[Transaction]] =   db.run(query)
+
+    accTransactions.map(x=>x.foreach(b=>b.transactionType match {
+      case "debit"  => accountBalance = accountBalance - b.amount
+      case "credit" => accountBalance = accountBalance + b.amount
+    }))
+
+
+    /*
     for(transactioon <- accTransactions){
       transactioon.transactionType match {
         case "debit"  => accountBalance = accountBalance - transactioon.amount
         case "credit" => accountBalance = accountBalance + transactioon.amount
        }
-    }
+    } */
     accountBalance
   }
   //todo: Get Transactioons by date and account

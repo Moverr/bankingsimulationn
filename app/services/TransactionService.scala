@@ -8,12 +8,13 @@ import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.Future
 import collection.mutable
-
+import scala.util.{Failure, Success}
+import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
   //todo: credit
-  def credit(request:TransactionRequest): Future[Transaction] ={
+  def credit(request:TransactionRequest): Transaction ={
     //todo: validate account
     val response = accountService.getByAccNumber(request.accNumber)
     response match {
@@ -38,14 +39,18 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
         //todo: Credit
         val transaction = Transaction(0L,account.accNumber,request.amount,TransactionType.credit.toString,request.transactionDate.toString("yyyy-MM-d"));
-        transactionDAO.Create(transaction)
-        //todo: Do update resultant account
-        transactionDAO.updateAbsoluteAccountBalance(transaction.accNumber)
-        Future.successful(transaction)
+
+       transactionDAO.Create(transaction)
+          .onComplete{
+            case Success(transaction) => {
+              transactionDAO.updateAbsoluteAccountBalance(transaction.accNumber)
+              transaction
+            }
+            case Failure(exception) => throw new Exception("Record was not saved succesfully")
+          }
       }
-      case None => throw new NullPointerException("Account does not exist")
-    }
-  }
+
+   }
 
   //todo: debit
   def debit(request:TransactionRequest): Future[Transaction] ={

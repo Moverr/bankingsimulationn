@@ -10,5 +10,7 @@ class TransactionTable(tag: Tag) extends Table[Transaction] (tag,"transaction"){
   def transactionType = column[String]("transactionType")
   def transactionDate = column[String]("transactionDate")
 
-  override  def * = (id,accNumber,amount,transactionType,transactionDate).mapTo[Transaction]
+  override  def * = (id,accNumber,amount,transactionType,transactionDate).shaped.mapTo[Transaction]
+  //<> ((Transaction.apply _)tupled,Transaction.unapply)
+//    .mapTo[Transaction]
 }

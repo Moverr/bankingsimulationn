@@ -15,6 +15,8 @@ import play.api.libs.json.Json
 import play.api.test.Helpers._
 import play.api.test._
 import org.mockito.Mockito
+import play.api.db.slick.DatabaseConfigProvider
+import slick.jdbc.H2Profile.api._
 
 class TransactionsControllerTest extends PlaySpec {
 
@@ -25,7 +27,8 @@ class TransactionsControllerTest extends PlaySpec {
   "TransactionsController" should{
 
     val accountService:AccountService = Mockito.mock(classOf[AccountService])
-    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO())
+    val act:DatabaseConfigProvider = Mockito.mock(classOf[DatabaseConfigProvider])
+    val transactionService:TransactionService = new TransactionService(accountService,new TransactionDAO(act))
 
     "credit Account" in {
       val account =   Account(0L,"Muyinda Rogers","12345",None)
