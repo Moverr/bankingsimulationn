@@ -1,7 +1,6 @@
 package services
 
 import controllers.requests.TransactionRequest
-import controllers.responses.TransactionResponse
 import daos.TransactionDAO
 import db.tables.{Account, Transaction}
 import helpers.{Constants, TransactionType}
@@ -9,10 +8,9 @@ import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{Await, Future}
 import collection.mutable
-import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
-import scala.concurrent.impl.Promise
+
 @Singleton
 class TransactionService @Inject()(  accountService: AccountService,transactionDAO: TransactionDAO){
 
