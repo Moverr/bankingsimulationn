@@ -123,7 +123,6 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
         accountService.updateAccountBalance(accountName,Some(accountBalance))
     }
 
-
   }
 
 
