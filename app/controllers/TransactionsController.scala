@@ -29,15 +29,14 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
 
     val transactionRequest:TransactionRequest = TransactionRequest(accnumber,amount,transactionType,transaction_date)
 
-    val response =  transactionService.credit(transactionRequest)
-
-    response
+     transactionService.credit(transactionRequest)
       .flatMap{
         result=> Future.successful(Ok(Json.toJson(result)))
       }
     }catch{
-      case e:RuntimeException=>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
-      case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
+      case e:RuntimeException =>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
+      case eb:NullPointerException=>  Future.successful(NotFound(Json.toJson(eb.getMessage)))
+    //  case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
     }
   }
 
@@ -63,7 +62,8 @@ class TransactionsController   @Inject()(cc:ControllerComponents,transactionServ
       }
     }catch{
       case e:RuntimeException=>  Future.successful(BadRequest(Json.toJson(e.getMessage)))
-      case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
+      case e:NullPointerException=>  Future.successful(NotFound(Json.toJson(e.getMessage)))
+     // case _: Throwable =>  Future.successful(InternalServerError("Something Went wrong, contact system administratior"))
     }
   }
 

@@ -16,7 +16,8 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
   //todo: credit
   def credit(request:TransactionRequest): Future[Transaction] = {
     //todo: validate account
-     accountService.getByAccNumber(request.accNumber).map(x=>x).flatMap{
+     val response = accountService.getByAccNumber(request.accNumber)
+    response.map(x=>x).flatMap{
       y=>
         y match {
           case Some(account:Account) =>{
@@ -106,7 +107,7 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
      transactionDAO.list(accNumber,transactionDate,transactionType).map(x=>x)
 
 
-  def updateAbsoluteBalance(accountName:String): Future[Unit] ={
+  def updateAbsoluteBalance(accountName:String): Unit ={
     val res:Seq[Transaction] = Await.result(transactionDAO.getAbsoluteBalance(accountName),Duration.Inf)
 
     if(res != null){
@@ -118,10 +119,10 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
             case "debit" =>  accountBalance -= x.amount
           }
         }
-        accountService updateAccountBalance(accountName,Some(accountBalance))
+        accountService.updateAccountBalance(accountName,Some(accountBalance))
     }
 
-    Future.successful("Succesful Transaction")
+
   }
 
 
