@@ -44,7 +44,7 @@ sbt on your cmd
  |-----|--------|--------------|---------------|
  |http://localhost:9000/deposit|POST|{"accnumber":"12345","amount":"4000","transaction_date":"2021-03-21"}| { "id": 47, "accNumber": "12345", "amount": 4000, "transactionType": "credit",  "transactionDate": "2021-03-21" }| 
  |http://localhost:9000/withdraw|POST|{"accnumber":"12345","amount":"4000","transaction_date":"2021-03-21"}| { "id": 47, "accNumber": "12345", "amount": 4000, "transactionType": "debit",  "transactionDate": "2021-03-21" }|
- |http://localhost:9000/balance/1234|GET| - | {  "id": 1,  "accName": "Muyinda Rogers", "accNumber": "12345", "accBalance": null }|
+ |http://localhost:9000/balance/12345|GET| - | {  "id": 1,  "accName": "Muyinda Rogers", "accNumber": "12345", "accBalance": null }|
    
    Constraints.
    There are constraints and error messages that are thrown back and some are validation rules as stipulated in the guiding problem statment
