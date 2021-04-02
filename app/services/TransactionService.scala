@@ -15,6 +15,9 @@ class TransactionService @Inject()(  accountService: AccountService,transactionD
 
   //todo: credit
 
+  @throws(classOf[RuntimeException])
+  @throws(classOf[Exception])
+  @throws(classOf[NullPointerException])
   def credit(request:TransactionRequest): Future[Transaction] = {
     //todo: validate account
      val response = accountService.getByAccNumber(request.accNumber)
